@@ -1,0 +1,8 @@
+com/hcb/PropertyUtils.class
+com/hcb/PathInfo.class
+com/hcb/StringByteCodec.class
+com/hcb/RfsFileOutputStream.class
+com/hcb/RfsFileInputStream.class
+com/hcb/RfsUnderFileSystem.class
+com/hcb/FileInfo.class
+com/hcb/MfsFileSystem.class
