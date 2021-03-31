@@ -98,10 +98,12 @@ public class RfsUnderFileSystem {
         if (!connection.exists(RfsUnderFileSystem.METADATA + path)) {
             throw new FileNotFoundException();
         }
-        if (!connection.exists(RfsUnderFileSystem.INDEX + path)) {
-            return new FileStatus[0];
-        }
+//        if (!connection.exists(RfsUnderFileSystem.INDEX + path)) {
+//            return new FileStatus[0];
+//        }
         List<String> subPaths = connection.hkeys(RfsUnderFileSystem.INDEX + path);
+        String logFormat = String.join(",", subPaths);
+        MfsFileSystem.LOG.error("index hashmap : "+ logFormat);
         FileStatus[] fileStatuses = new FileStatus[subPaths.size()];
         int i = 0;
         for (String subPath : subPaths) {

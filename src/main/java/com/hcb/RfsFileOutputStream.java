@@ -46,14 +46,15 @@ public class RfsFileOutputStream extends OutputStream {
         FileInfo fileInfo = new FileInfo(pointer);
         pathInfo.setFileInfo(fileInfo);
         String parentPath = getParentPath(path);
-        //todo 利用hash代替set,value值可以去利用一下
-        connection.hset(RfsUnderFileSystem.INDEX + parentPath, path, "1");
-        //data
-        dataConnection.set(RfsUnderFileSystem.FILEDATA + path, Arrays.copyOf(byteBuffer, pointer));
-        //metadata
-        connection.set(RfsUnderFileSystem.METADATA + path, gson.toJson(pathInfo));
         String dstPath = getDstPath(path);
-        renameFile(path, dstPath);
+        //todo 利用hash代替set,value值可以去利用一下
+        connection.hset(RfsUnderFileSystem.INDEX + parentPath, dstPath, "1");
+        //data
+        dataConnection.set(RfsUnderFileSystem.FILEDATA + dstPath, Arrays.copyOf(byteBuffer, pointer));
+        //metadata
+        connection.set(RfsUnderFileSystem.METADATA + dstPath, gson.toJson(pathInfo));
+        
+//        renameFile(path, dstPath);
         MfsFileSystem.LOG.error("RfsFileOutputStream.close()调用结束:"+" pathInfo.name " + path + " pointer： " + pointer);
     }
 
